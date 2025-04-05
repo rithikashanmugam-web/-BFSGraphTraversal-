@@ -1,0 +1,44 @@
+public class LinkedListLoopDetection {
+    static class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    Node head;
+    public boolean detectLoop() {
+        Node slow = head, fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        LinkedListLoopDetection list = new LinkedListLoopDetection();
+        Node first = new Node(10);
+        Node second = new Node(20);
+        Node third = new Node(30);
+        Node fourth = new Node(40);
+
+        list.head = first;
+        first.next = second;
+        second.next = third;
+        third.next = fourth;
+        fourth.next = second; 
+
+        if (list.detectLoop()) {
+            System.out.println("Loop detected");
+        } else {
+            System.out.println("No loop detected");
+        }
+    }
+}
