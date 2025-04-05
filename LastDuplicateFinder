@@ -1,0 +1,23 @@
+import java.util.HashSet;
+public class LastDuplicateFinder {
+    public static void main(String[] args) {
+        int[] arr = {3, 5, 2, 3, 4, 2, 5, 6};
+        Integer lastDuplicate = findLastDuplicate(arr);
+        if (lastDuplicate != null) {
+            System.out.println("Last duplicate element is: " + lastDuplicate);
+        } else {
+            System.out.println("No duplicates found.");
+        }
+    }
+    public static Integer findLastDuplicate(int[] arr) {
+        HashSet<Integer> seen = new HashSet<>();
+        for (int i = arr.length - 1; i >= 0; i--) {
+            if (seen.contains(arr[i])) {
+                return arr[i]; 
+            } else {
+                seen.add(arr[i]);
+            }
+        }
+        return null; 
+    }
+}
